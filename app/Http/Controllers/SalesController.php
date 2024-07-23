@@ -20,10 +20,10 @@ class SalesController extends Controller
     public function create()
     {
         $customers = Customer::all();
-        $barangs = Barang::all();
+        $barang = Barang::all();
         return Inertia::render('Sales/Create', [
             'customers' => $customers,
-            'barangs' => $barangs,
+            'barang' => $barang,
         ]);
     }
 
