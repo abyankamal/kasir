@@ -4,6 +4,7 @@ import { Head, Link } from "@inertiajs/react";
 export default function Index({ auth, sales }) {
     return (
         <>
+            <Head title="Daftar Transaksi" />
             <div>
                 <label for="search">Cari</label>
                 <input type="text" id="search" name="search" />

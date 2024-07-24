@@ -1,3 +1,5 @@
+import Modal from "@/Components/Modal";
+import ApplicationLayout from "@/Layouts/ApplicationLayout";
 import { Head, useForm } from "@inertiajs/react";
 import React, { useState } from "react";
 
@@ -9,6 +11,10 @@ export default function Create({ auth, customers, barangs }) {
     });
 
     const [items, setItems] = useState([]);
+    const [showCustomer, setShowCustomer] = useState(false);
+
+    const handleCloseCustomer = () => setShowCustomer(false);
+    const handleShowCustomer = () => setShowCustomer(true);
 
     const addItem = () => {
         setItems([...items, { barang_id: "", qty: 1, diskon_pct: 0 }]);
@@ -33,33 +39,183 @@ export default function Create({ auth, customers, barangs }) {
     };
 
     return (
-        <>
+        <ApplicationLayout>
             <Head title="Tambah Transaksi" />
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <h1 className="text-2xl font-semibold mb-4">
-                        Input Transaksi
-                    </h1>
                     <form onSubmit={handleSubmit}>
-                        <div className="mb-4">
-                            <label>Customer</label>
-                            <select
-                                value={data.customer_id}
-                                onChange={(e) =>
-                                    setData("customer_id", e.target.value)
-                                }
-                                className="w-full mt-1"
+                        <div className="mb-8">
+                            <label className="text-2xl font-semibold">
+                                Transaksi
+                            </label>
+                            <div>
+                                <div class="md:flex md:items-center mt-4 mb-6">
+                                    <div class="flex w-full">
+                                        <div class="md:w-1/12">
+                                            <label
+                                                class="block text-black font-bold mb-1 md:mb-0"
+                                                for="inline-password"
+                                            >
+                                                No
+                                            </label>
+                                        </div>
+                                        <div class="md:w-1/5">
+                                            <input
+                                                class="appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-800"
+                                                id="first-name"
+                                                type="number"
+                                                placeholder="Nomor Transaksi"
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="md:flex md:items-center mb-6">
+                                    <div class="flex w-full">
+                                        <div class="md:w-1/12">
+                                            <label
+                                                class=" text-gray-500 font-bold mb-1 md:mb-0"
+                                                for="inline-password"
+                                            >
+                                                Tanggal
+                                            </label>
+                                        </div>
+                                        <div class="md:w-1/5">
+                                            <input
+                                                class="appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-800"
+                                                id="first-name"
+                                                type="date"
+                                                placeholder="Nomor Transaksi"
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button
+                                onClick={handleShowCustomer}
+                                className="bg-green-500 text-white px-4 py-2 rounded"
                             >
-                                <option value="">Pilih Customer</option>
-                                {customers.map((customer) => (
-                                    <option
-                                        key={customer.id}
-                                        value={customer.id}
+                                Tambah Konsumen
+                            </button>
+                            <Modal
+                                show={showCustomer}
+                                onClose={handleCloseCustomer}
+                            >
+                                <div className="p-6 w-full">
+                                    <p className="text-center">
+                                        Tambah Konsumen
+                                    </p>
+                                    <select
+                                        value={data.customer_id}
+                                        onChange={(e) =>
+                                            setData(
+                                                "customer_id",
+                                                e.target.value
+                                            )
+                                        }
+                                        className="w-full mt-1"
                                     >
-                                        {customer.name}
-                                    </option>
-                                ))}
-                            </select>
+                                        <option value="">Pilih Customer</option>
+                                        {customers.map((customer) => (
+                                            <option
+                                                key={customer.id}
+                                                value={customer.id}
+                                            >
+                                                {customer.name}
+                                            </option>
+                                        ))}
+                                    </select>
+                                    <div class="max-w-md mx-auto mt-8 p-6 bg-white shadow-md rounded-md">
+                                        <form class="space-y-4">
+                                            <div class="flex items-center">
+                                                <label
+                                                    for="kode"
+                                                    class="w-20 font-bold text-gray-700"
+                                                >
+                                                    Kode
+                                                </label>
+                                                <input
+                                                    type="text"
+                                                    id="kode"
+                                                    name="kode"
+                                                    class="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                                />
+                                                <button
+                                                    type="button"
+                                                    class="ml-2 px-3 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                                >
+                                                    <svg
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        class="h-5 w-5"
+                                                        viewBox="0 0 20 20"
+                                                        fill="currentColor"
+                                                    >
+                                                        <path
+                                                            fill-rule="evenodd"
+                                                            d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                                                            clip-rule="evenodd"
+                                                        />
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                            <div class="flex items-center">
+                                                <label
+                                                    for="nama"
+                                                    class="w-20 font-bold text-gray-700"
+                                                >
+                                                    Nama
+                                                </label>
+                                                <input
+                                                    type="text"
+                                                    id="nama"
+                                                    name="nama"
+                                                    class="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                                />
+                                            </div>
+                                            <div class="flex items-center">
+                                                <label
+                                                    for="telp"
+                                                    class="w-20 font-bold text-gray-700"
+                                                >
+                                                    Telp
+                                                </label>
+                                                <input
+                                                    type="tel"
+                                                    id="telp"
+                                                    name="telp"
+                                                    class="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                                />
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div class="md:flex md:items-center mt-4 mx-auto mb-6">
+                                        <div class="flex w-full">
+                                            <div class="md:w-1/12">
+                                                <label
+                                                    class="block text-black font-bold mb-1 md:mb-0"
+                                                    for="inline-password"
+                                                >
+                                                    No
+                                                </label>
+                                            </div>
+                                            <div class="md:w-1/5">
+                                                <input
+                                                    class="appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-800"
+                                                    id="first-name"
+                                                    type="number"
+                                                    placeholder="Nomor Transaksi"
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </Modal>
                         </div>
 
                         <div className="mb-4">
@@ -144,146 +300,261 @@ export default function Create({ auth, customers, barangs }) {
 
                         <table
                             border="1"
-                            className="min-w-full divide-y divide-gray-300"
+                            className="min-w-full border border-collapse divide-y divide-gray-300"
                         >
                             <thead>
                                 <tr>
                                     <th
                                         scope="col"
-                                        className="py-3.5 pl-4 pr-3 text-center text-sm font-semibold text-gray-900 sm:pl-0"
+                                        className="py-3.5 pl-4 pr-3 text-center text-sm font-semibold text-gray-900 sm:pl-0 border border-slate-600"
                                         colspan="2"
+                                        rowSpan={2}
                                     >
-                                        Tambah
+                                        <button>Tambah</button>
                                     </th>
                                     <th
                                         scope="col"
-                                        className="py-3.5 pl-4 pr-3 text-center text-sm font-semibold text-gray-900 sm:pl-0"
+                                        className="py-3.5 pl-4 pr-3 text-center text-sm font-semibold text-gray-900 sm:pl-0 border border-slate-600"
+                                        rowSpan={2}
                                     >
                                         No
                                     </th>
                                     <th
                                         scope="col"
-                                        className="py-3.5 pl-4 pr-3 text-center text-sm font-semibold text-gray-900 sm:pl-0"
+                                        className="py-3.5 pl-4 pr-3 text-center text-sm font-semibold text-gray-900 sm:pl-0 border border-slate-600"
+                                        rowSpan={2}
                                     >
                                         Kode Barang
                                     </th>
                                     <th
                                         scope="col"
-                                        className="py-3.5 pl-4 pr-3 text-center text-sm font-semibold text-gray-900 sm:pl-0"
+                                        className="py-3.5 pl-4 pr-3 text-center text-sm font-semibold text-gray-900 sm:pl-0 border border-slate-600"
+                                        rowSpan={2}
                                     >
                                         Nama Barang
                                     </th>
                                     <th
                                         scope="col"
-                                        className="py-3.5 pl-4 pr-3 text-center text-sm font-semibold text-gray-900 sm:pl-0"
+                                        className="py-3.5 pl-4 pr-3 text-center text-sm font-semibold text-gray-900 sm:pl-0 border border-slate-600"
+                                        rowSpan={2}
                                     >
                                         Qty
                                     </th>
                                     <th
                                         scope="col"
-                                        className="py-3.5 pl-4 pr-3 text-center text-sm font-semibold text-gray-900 sm:pl-0"
+                                        className="py-3.5 pl-4 pr-3 text-center text-sm font-semibold text-gray-900 sm:pl-0 border border-slate-600"
+                                        rowSpan={2}
                                     >
                                         Harga Bandrol
                                     </th>
                                     <th
                                         scope="col"
-                                        className="py-3.5 pl-4 pr-3 text-sm font-semibold text-gray-900 text-center sm:pl-0"
+                                        className="py-3.5 pl-4 pr-3 text-sm font-semibold text-gray-900 text-center sm:pl-0 border border-slate-600"
                                         colspan="2"
                                     >
                                         Diskon
                                     </th>
                                     <th
                                         scope="col"
-                                        className="py-3.5 pl-4 pr-3 text-center text-sm font-semibold text-gray-900 sm:pl-0"
+                                        className="py-3.5 pl-4 pr-3 text-center text-sm font-semibold text-gray-900 sm:pl-0 border border-slate-600"
+                                        rowSpan={2}
                                     >
                                         Harga Diskon
                                     </th>
                                     <th
                                         scope="col"
-                                        className="py-3.5 pl-4 pr-3 text-center text-sm font-semibold text-gray-900 sm:pl-0"
+                                        className="py-3.5 pl-4 pr-3 text-center text-sm font-semibold text-gray-900 sm:pl-0 border border-slate-600"
+                                        rowSpan={2}
                                     >
                                         Total
                                     </th>
                                 </tr>
                                 <tr>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th>(%)</th>
-                                    <th>(Rp)</th>
+                                    <th className="border border-slate-600">
+                                        (%)
+                                    </th>
+                                    <th className="border border-slate-600">
+                                        (Rp)
+                                    </th>
                                     <th></th>
                                     <th></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>Ubah</td>
-                                    <td>Hapus</td>
-                                    <td>1</td>
-                                    <td>A001</td>
-                                    <td>Barang A</td>
-                                    <td>1</td>
-                                    <td>200,000.00</td>
-                                    <td>0%</td>
-                                    <td>-</td>
-                                    <td>200,000.00</td>
-                                    <td>200,000.00</td>
+                                    <td className="border border-slate-600">
+                                        Ubah
+                                    </td>
+                                    <td className="border border-slate-600">
+                                        Hapus
+                                    </td>
+                                    <td className="border border-slate-600">
+                                        1
+                                    </td>
+                                    <td className="border border-slate-600">
+                                        A001
+                                    </td>
+                                    <td className="border border-slate-600">
+                                        Barang A
+                                    </td>
+                                    <td className="border border-slate-600">
+                                        1
+                                    </td>
+                                    <td className="border border-slate-600">
+                                        200,000.00
+                                    </td>
+                                    <td className="border border-slate-600">
+                                        0%
+                                    </td>
+                                    <td className="border border-slate-600">
+                                        -
+                                    </td>
+                                    <td className="border border-slate-600">
+                                        200,000.00
+                                    </td>
+                                    <td className="border border-slate-600">
+                                        200,000.00
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <td>Ubah</td>
-                                    <td>Hapus</td>
-                                    <td>2</td>
-                                    <td>C025</td>
-                                    <td>Barang B</td>
-                                    <td>2</td>
-                                    <td>350,000.00</td>
-                                    <td>15%</td>
-                                    <td>52,500.00</td>
-                                    <td>297,500.00</td>
-                                    <td>595,000.00</td>
+                                    <td className="border border-slate-600">
+                                        Ubah
+                                    </td>
+                                    <td className="border border-slate-600">
+                                        Hapus
+                                    </td>
+                                    <td className="border border-slate-600">
+                                        2
+                                    </td>
+                                    <td className="border border-slate-600">
+                                        C025
+                                    </td>
+                                    <td className="border border-slate-600">
+                                        Barang B
+                                    </td>
+                                    <td className="border border-slate-600">
+                                        2
+                                    </td>
+                                    <td className="border border-slate-600">
+                                        350,000.00
+                                    </td>
+                                    <td className="border border-slate-600">
+                                        15%
+                                    </td>
+                                    <td className="border border-slate-600">
+                                        52,500.00
+                                    </td>
+                                    <td className="border border-slate-600">
+                                        297,500.00
+                                    </td>
+                                    <td className="border border-slate-600">
+                                        595,000.00
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <td>Ubah</td>
-                                    <td>Hapus</td>
-                                    <td>3</td>
-                                    <td>A102</td>
-                                    <td>Barang C</td>
-                                    <td>2</td>
-                                    <td>125,000.00</td>
-                                    <td>20%</td>
-                                    <td>25,000.00</td>
-                                    <td>100,000.00</td>
-                                    <td>200,000.00</td>
+                                    <td className="border border-slate-600">
+                                        Ubah
+                                    </td>
+                                    <td className="border border-slate-600">
+                                        Hapus
+                                    </td>
+                                    <td className="border border-slate-600">
+                                        3
+                                    </td>
+                                    <td className="border border-slate-600">
+                                        A102
+                                    </td>
+                                    <td className="border border-slate-600">
+                                        Barang C
+                                    </td>
+                                    <td className="border border-slate-600">
+                                        2
+                                    </td>
+                                    <td className="border border-slate-600">
+                                        125,000.00
+                                    </td>
+                                    <td className="border border-slate-600">
+                                        20%
+                                    </td>
+                                    <td className="border border-slate-600">
+                                        25,000.00
+                                    </td>
+                                    <td className="border border-slate-600">
+                                        100,000.00
+                                    </td>
+                                    <td className="border border-slate-600">
+                                        200,000.00
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <td>Ubah</td>
-                                    <td>Hapus</td>
-                                    <td>4</td>
-                                    <td>A301</td>
-                                    <td>Barang D</td>
-                                    <td>3</td>
-                                    <td>300,000.00</td>
-                                    <td>0%</td>
-                                    <td>-</td>
-                                    <td>300,000.00</td>
-                                    <td>900,000.00</td>
+                                    <td className="border border-slate-600">
+                                        Ubah
+                                    </td>
+                                    <td className="border border-slate-600">
+                                        Hapus
+                                    </td>
+                                    <td className="border border-slate-600">
+                                        4
+                                    </td>
+                                    <td className="border border-slate-600">
+                                        A301
+                                    </td>
+                                    <td className="border border-slate-600">
+                                        Barang D
+                                    </td>
+                                    <td className="border border-slate-600">
+                                        3
+                                    </td>
+                                    <td className="border border-slate-600">
+                                        300,000.00
+                                    </td>
+                                    <td className="border border-slate-600">
+                                        0%
+                                    </td>
+                                    <td className="border border-slate-600">
+                                        -
+                                    </td>
+                                    <td className="border border-slate-600">
+                                        300,000.00
+                                    </td>
+                                    <td className="border border-slate-600">
+                                        900,000.00
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <td>Ubah</td>
-                                    <td>Hapus</td>
-                                    <td>5</td>
-                                    <td>B221</td>
-                                    <td>Barang E</td>
-                                    <td>2</td>
-                                    <td>300,000.00</td>
-                                    <td>0%</td>
-                                    <td>-</td>
-                                    <td>300,000.00</td>
-                                    <td>600,000.00</td>
+                                    <td className="border border-slate-600">
+                                        Ubah
+                                    </td>
+                                    <td className="border border-slate-600">
+                                        Hapus
+                                    </td>
+                                    <td className="border border-slate-600">
+                                        5
+                                    </td>
+                                    <td className="border border-slate-600">
+                                        B221
+                                    </td>
+                                    <td className="border border-slate-600">
+                                        Barang E
+                                    </td>
+                                    <td className="border border-slate-600">
+                                        2
+                                    </td>
+                                    <td className="border border-slate-600">
+                                        300,000.00
+                                    </td>
+                                    <td className="border border-slate-600">
+                                        0%
+                                    </td>
+                                    <td className="border border-slate-600">
+                                        -
+                                    </td>
+                                    <td className="border border-slate-600">
+                                        300,000.00
+                                    </td>
+                                    <td className="border border-slate-600">
+                                        600,000.00
+                                    </td>
                                 </tr>
                             </tbody>
                             <tfoot>
@@ -321,16 +592,25 @@ export default function Create({ auth, customers, barangs }) {
                             </tfoot>
                         </table>
 
-                        <button
-                            type="submit"
-                            disabled={processing}
-                            className="bg-blue-500 text-white px-4 py-2 rounded"
-                        >
-                            Simpan Transaksi
-                        </button>
+                        <div className="flex justify-center mt-8">
+                            <button
+                                type="submit"
+                                disabled={processing}
+                                className="bg-blue-500 text-white px-4 py-2 mr-8 rounded"
+                            >
+                                Simpan
+                            </button>
+                            <button
+                                type="submit"
+                                disabled={processing}
+                                className="bg-red-500 text-white px-4 py-2 rounded"
+                            >
+                                Hapus
+                            </button>
+                        </div>
                     </form>
                 </div>
             </div>
-        </>
+        </ApplicationLayout>
     );
 }

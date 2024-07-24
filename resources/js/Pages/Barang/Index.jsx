@@ -1,8 +1,7 @@
 // resources/js/Pages/Barang/Index.jsx
 import React from "react";
-import { Head, Link } from "@inertiajs/inertia-react";
-import { Inertia } from "@inertiajs/inertia";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
+import { Head, Link } from "@inertiajs/react";
 
 export default function Index({ auth, barangs }) {
     const deleteBarang = (id) => {
