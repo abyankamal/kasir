@@ -1,8 +1,7 @@
 // resources/js/Pages/Barang/Create.jsx
 import React from "react";
-import { Head, useForm } from "@inertiajs/inertia-react";
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import ApplicationLayout from "@/Layouts/ApplicationLayout";
+import { Head, useForm } from "@inertiajs/react";
 
 export default function Create({ auth }) {
     const { data, setData, post, processing, errors } = useForm({
@@ -17,7 +16,7 @@ export default function Create({ auth }) {
     };
 
     return (
-        <ApplicationLayout user={auth.user}>
+        <ApplicationLayout>
             <Head title="Tambah Barang" />
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">

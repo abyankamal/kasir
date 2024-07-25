@@ -1,7 +1,7 @@
-// resources/js/Pages/Barang/Index.jsx
 import React from "react";
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, Link } from "@inertiajs/react";
+import ApplicationLayout from "@/Layouts/ApplicationLayout";
+import Pagination from "@/Components/Pagination";
 
 export default function Index({ auth, barangs }) {
     const deleteBarang = (id) => {
@@ -11,7 +11,7 @@ export default function Index({ auth, barangs }) {
     };
 
     return (
-        <AuthenticatedLayout user={auth.user}>
+        <ApplicationLayout>
             <Head title="Daftar Barang" />
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -24,46 +24,65 @@ export default function Index({ auth, barangs }) {
                     >
                         Tambah Barang
                     </Link>
-                    <table className="mt-4 w-full">
-                        <thead>
-                            <tr>
-                                <th>Kode</th>
-                                <th>Nama</th>
-                                <th>Harga</th>
-                                <th>Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {barangs.map((barang) => (
-                                <tr key={barang.id}>
-                                    <td>{barang.kode}</td>
-                                    <td>{barang.nama}</td>
-                                    <td>{barang.harga}</td>
-                                    <td>
-                                        <Link
-                                            href={route(
-                                                "barang.edit",
-                                                barang.id
-                                            )}
-                                            className="text-blue-600 hover:text-blue-900 mr-2"
-                                        >
-                                            Edit
-                                        </Link>
-                                        <button
-                                            onClick={() =>
-                                                deleteBarang(barang.id)
-                                            }
-                                            className="text-red-600 hover:text-red-900"
-                                        >
-                                            Delete
-                                        </button>
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
+                    <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                        <div className="p-6 text-gray-900">
+                            <div className="mt-8 flow-root">
+                                <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                                    <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+                                        <table className="min-w-full divide-y divide-gray-300">
+                                            <thead>
+                                                <tr>
+                                                    <th>Kode</th>
+                                                    <th>Nama</th>
+                                                    <th>Harga</th>
+                                                    <th>Aksi</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody className="divide-y divide-gray-200">
+                                                {barangs.map((barang) => (
+                                                    <tr key={barang.id}>
+                                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                                            {barang.kode}
+                                                        </td>
+                                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                                            {barang.nama}
+                                                        </td>
+                                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                                            {barang.harga}
+                                                        </td>
+                                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                                            <Link
+                                                                href={route(
+                                                                    "barang.edit",
+                                                                    barang.id
+                                                                )}
+                                                                className="text-blue-600 hover:text-blue-900 mr-2"
+                                                            >
+                                                                Edit
+                                                            </Link>
+                                                            <button
+                                                                onClick={() =>
+                                                                    deleteBarang(
+                                                                        barang.id
+                                                                    )
+                                                                }
+                                                                className="text-red-600 hover:text-red-900"
+                                                            >
+                                                                Delete
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                ))}
+                                            </tbody>
+                                        </table>
+                                        {/* <Pagination links={barangs.links} /> */}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </AuthenticatedLayout>
+        </ApplicationLayout>
     );
 }

@@ -12,9 +12,13 @@ export default function Create({ auth, customers, barangs }) {
 
     const [items, setItems] = useState([]);
     const [showCustomer, setShowCustomer] = useState(false);
+    const [showBarang, setShowBarang] = useState(false);
 
     const handleCloseCustomer = () => setShowCustomer(false);
     const handleShowCustomer = () => setShowCustomer(true);
+
+    const handleCloseBarang = () => setShowBarang(false);
+    const handleShowBarang = () => setShowBarang(true);
 
     const addItem = () => {
         setItems([...items, { barang_id: "", qty: 1, diskon_pct: 0 }]);
@@ -48,29 +52,36 @@ export default function Create({ auth, customers, barangs }) {
                             <label className="text-2xl font-semibold">
                                 Transaksi
                             </label>
-                            <div>
-                                <div class="md:flex md:items-center mt-4 mb-6">
-                                    <div class="flex w-full">
-                                        <div class="md:w-1/12">
-                                            <label
-                                                class="block text-black font-bold mb-1 md:mb-0"
-                                                for="inline-password"
-                                            >
-                                                No
-                                            </label>
-                                        </div>
-                                        <div class="md:w-1/5">
-                                            <input
-                                                class="appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-800"
-                                                id="first-name"
-                                                type="number"
-                                                placeholder="Nomor Transaksi"
-                                            />
-                                        </div>
-                                    </div>
+                            <div className="space-y-4">
+                                <div class="flex items-center">
+                                    <label
+                                        for="nama"
+                                        class="w-20 font-bold text-gray-700"
+                                    >
+                                        Nama
+                                    </label>
+                                    <input
+                                        type="text"
+                                        id="nama"
+                                        name="nama"
+                                        class="flex-1 md:w-1/12 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    />
+                                </div>
+                                <div class="flex items-center">
+                                    <label
+                                        for="nama"
+                                        class="w-20 font-bold text-gray-700"
+                                    >
+                                        Nama
+                                    </label>
+                                    <input
+                                        type="text"
+                                        id="nama"
+                                        name="nama"
+                                        class="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    />
                                 </div>
                             </div>
-
                             <div>
                                 <div class="md:flex md:items-center mb-6">
                                     <div class="flex w-full">
@@ -93,13 +104,13 @@ export default function Create({ auth, customers, barangs }) {
                                     </div>
                                 </div>
                             </div>
-
                             <button
                                 onClick={handleShowCustomer}
                                 className="bg-green-500 text-white px-4 py-2 rounded"
                             >
                                 Tambah Konsumen
                             </button>
+                            // Modal Customer
                             <Modal
                                 show={showCustomer}
                                 onClose={handleCloseCustomer}
@@ -128,95 +139,154 @@ export default function Create({ auth, customers, barangs }) {
                                             </option>
                                         ))}
                                     </select>
-                                    <div class="max-w-md mx-auto mt-8 p-6 bg-white shadow-md rounded-md">
-                                        <form class="space-y-4">
-                                            <div class="flex items-center">
-                                                <label
-                                                    for="kode"
-                                                    class="w-20 font-bold text-gray-700"
+                                    <div class="space-y-4">
+                                        <div class="flex items-center">
+                                            <label
+                                                for="kode"
+                                                class="w-20 font-bold text-gray-700"
+                                            >
+                                                Kode
+                                            </label>
+                                            <input
+                                                type="text"
+                                                id="kode"
+                                                name="kode"
+                                                class="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                            />
+                                            {/* <button
+                                                type="button"
+                                                class="ml-2 px-3 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                            >
+                                                <svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    class="h-5 w-5"
+                                                    viewBox="0 0 20 20"
+                                                    fill="currentColor"
                                                 >
-                                                    Kode
-                                                </label>
-                                                <input
-                                                    type="text"
-                                                    id="kode"
-                                                    name="kode"
-                                                    class="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                                />
-                                                <button
-                                                    type="button"
-                                                    class="ml-2 px-3 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                                >
-                                                    <svg
-                                                        xmlns="http://www.w3.org/2000/svg"
-                                                        class="h-5 w-5"
-                                                        viewBox="0 0 20 20"
-                                                        fill="currentColor"
-                                                    >
-                                                        <path
-                                                            fill-rule="evenodd"
-                                                            d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                                                            clip-rule="evenodd"
-                                                        />
-                                                    </svg>
-                                                </button>
-                                            </div>
-                                            <div class="flex items-center">
-                                                <label
-                                                    for="nama"
-                                                    class="w-20 font-bold text-gray-700"
-                                                >
-                                                    Nama
-                                                </label>
-                                                <input
-                                                    type="text"
-                                                    id="nama"
-                                                    name="nama"
-                                                    class="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                                />
-                                            </div>
-                                            <div class="flex items-center">
-                                                <label
-                                                    for="telp"
-                                                    class="w-20 font-bold text-gray-700"
-                                                >
-                                                    Telp
-                                                </label>
-                                                <input
-                                                    type="tel"
-                                                    id="telp"
-                                                    name="telp"
-                                                    class="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                                />
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-
-                                <div>
-                                    <div class="md:flex md:items-center mt-4 mx-auto mb-6">
-                                        <div class="flex w-full">
-                                            <div class="md:w-1/12">
-                                                <label
-                                                    class="block text-black font-bold mb-1 md:mb-0"
-                                                    for="inline-password"
-                                                >
-                                                    No
-                                                </label>
-                                            </div>
-                                            <div class="md:w-1/5">
-                                                <input
-                                                    class="appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-800"
-                                                    id="first-name"
-                                                    type="number"
-                                                    placeholder="Nomor Transaksi"
-                                                />
-                                            </div>
+                                                    <path
+                                                        fill-rule="evenodd"
+                                                        d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                                                        clip-rule="evenodd"
+                                                    />
+                                                </svg>
+                                            </button> */}
+                                        </div>
+                                        <div class="flex items-center">
+                                            <label
+                                                for="nama"
+                                                class="w-20 font-bold text-gray-700"
+                                            >
+                                                Nama
+                                            </label>
+                                            <input
+                                                type="text"
+                                                id="nama"
+                                                name="nama"
+                                                class="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                            />
+                                        </div>
+                                        <div class="flex items-center">
+                                            <label
+                                                for="telp"
+                                                class="w-20 font-bold text-gray-700"
+                                            >
+                                                Telp
+                                            </label>
+                                            <input
+                                                type="tel"
+                                                id="telp"
+                                                name="telp"
+                                                class="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                            />
                                         </div>
                                     </div>
                                 </div>
                             </Modal>
                         </div>
+
+                        <Modal show={showBarang} onClose={handleCloseBarang}>
+                            <div className="p-6 w-full">
+                                <p className="text-center">Tambah Konsumen</p>
+                                <select
+                                    value={data.customer_id}
+                                    onChange={(e) =>
+                                        setData("customer_id", e.target.value)
+                                    }
+                                    className="w-full mt-1"
+                                >
+                                    <option value="">Pilih Customer</option>
+                                    {customers.map((customer) => (
+                                        <option
+                                            key={customer.id}
+                                            value={customer.id}
+                                        >
+                                            {customer.name}
+                                        </option>
+                                    ))}
+                                </select>
+                                <div class="space-y-4">
+                                    <div class="flex items-center">
+                                        <label
+                                            for="kode"
+                                            class="w-20 font-bold text-gray-700"
+                                        >
+                                            Kode
+                                        </label>
+                                        <input
+                                            type="text"
+                                            id="kode"
+                                            name="kode"
+                                            class="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                        />
+                                        {/* <button
+                                                type="button"
+                                                class="ml-2 px-3 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                            >
+                                                <svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    class="h-5 w-5"
+                                                    viewBox="0 0 20 20"
+                                                    fill="currentColor"
+                                                >
+                                                    <path
+                                                        fill-rule="evenodd"
+                                                        d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                                                        clip-rule="evenodd"
+                                                    />
+                                                </svg>
+                                            </button> */}
+                                    </div>
+                                    <div class="flex items-center">
+                                        <label
+                                            for="nama"
+                                            class="w-20 font-bold text-gray-700"
+                                        >
+                                            Nama
+                                        </label>
+                                        <input
+                                            type="text"
+                                            id="nama"
+                                            name="nama"
+                                            class="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                        />
+                                    </div>
+                                    <div class="flex items-center">
+                                        <label
+                                            for="telp"
+                                            class="w-20 font-bold text-gray-700"
+                                        >
+                                            Telp
+                                        </label>
+                                        <input
+                                            type="tel"
+                                            id="telp"
+                                            name="telp"
+                                            class="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                        </Modal>
 
                         <div className="mb-4">
                             <button
@@ -310,7 +380,9 @@ export default function Create({ auth, customers, barangs }) {
                                         colspan="2"
                                         rowSpan={2}
                                     >
-                                        <button>Tambah</button>
+                                        <button onClick={handleShowBarang}>
+                                            Tambah
+                                        </button>
                                     </th>
                                     <th
                                         scope="col"

@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('sales_detail', function (Blueprint $table) {
+        Schema::create('t_sales_det', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('sales_id')->constrained('sales');
-            $table->foreignId('barang_id')->constrained('barang');
+            $table->foreignId('sales_id')->constrained('t_sales');
+            $table->foreignId('barang_id')->constrained('m_barang');
             $table->decimal('harga_bandrol', 10, 2);
             $table->integer('qty');
             $table->decimal('diskon_pct', 5, 2);

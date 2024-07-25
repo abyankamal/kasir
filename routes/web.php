@@ -25,6 +25,7 @@ Route::resource('/sales', SalesController::class);
 Route::get('/sales', [SalesController::class, 'index'])->name('sales');
 Route::get('/sales/create', [SalesController::class, 'create'])->name('sales.create');
 Route::get('/barang', [BarangController::class, 'index'])->name('barang');
+Route::get('/barang/tambah', [BarangController::class, 'index'])->name('barang.create');
 Route::get('/customer', [CustomerController::class, 'index'])->name('customer');
 
 Route::get('/dashboard', function () {

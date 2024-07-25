@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('sales', function (Blueprint $table) {
+        Schema::create('t_sales', function (Blueprint $table) {
             $table->id();
             $table->string('kode', 15);
             $table->dateTime('tgl');
-            $table->foreignId('cust_id')->constrained('customer');
+            $table->foreignId('cust_id')->constrained('m_customer');
             $table->decimal('subtotal', 10, 2);
             $table->decimal('diskon', 10, 2);
             $table->decimal('ongkir', 10, 2);

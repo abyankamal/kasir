@@ -29,7 +29,7 @@ class BarangController extends Controller
 
         Barang::create($validated);
 
-        return redirect()->route('barang.index')->with('message', 'Barang berhasil ditambahkan');
+        return redirect()->route('barang')->with('message', 'Barang berhasil ditambahkan');
     }
 
     public function edit(Barang $barang)
