@@ -18,15 +18,21 @@ Route::get('/', function () {
 });
 
 Route::redirect('/', '/sales');
-
-Route::resource('/barang', BarangController::class);
-Route::resource('/customer', CustomerController::class);
-Route::resource('/sales', SalesController::class);
 Route::get('/sales', [SalesController::class, 'index'])->name('sales');
 Route::get('/sales/create', [SalesController::class, 'create'])->name('sales.create');
+Route::post('/sales/store', [SalesController::class, 'create'])->name('sales.store');
+Route::get('sales/edit/{user}', [SalesController::class, 'edit'])->name('sales.edit');
+Route::patch('sales/update/{user}', [SalesController::class, 'update'])->name('sales.update');
 Route::get('/barang', [BarangController::class, 'index'])->name('barang');
-Route::get('/barang/tambah', [BarangController::class, 'index'])->name('barang.create');
+Route::get('/barang/tambah', [BarangController::class, 'create'])->name('barang.create');
+Route::post('/barang/store', [BarangController::class, 'store'])->name('barang.store');
+Route::get('barang/edit/{barang}', [BarangController::class, 'edit'])->name('barang.edit');
+Route::patch('barang/update/{barang}', [barangController::class, 'update'])->name('barang.update');
 Route::get('/customer', [CustomerController::class, 'index'])->name('customer');
+Route::get('/customer/tambah', [CustomerController::class, 'create'])->name('customer.create');
+Route::post('/customer/store', [CustomerController::class, 'store'])->name('customer.store');
+Route::get('customer/edit/{customer}', [CustomerController::class, 'edit'])->name('customer.edit');
+Route::patch('customer/update/{customer}', [CustomerController::class, 'update'])->name('customer.update');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

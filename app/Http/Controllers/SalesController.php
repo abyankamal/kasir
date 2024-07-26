@@ -77,6 +77,6 @@ class SalesController extends Controller
             ]);
         });
 
-        return redirect()->route('sales.index')->with('message', 'Transaksi berhasil disimpan');
+        return redirect()->route('sales')->with('message', 'Transaksi berhasil disimpan');
     }
 }

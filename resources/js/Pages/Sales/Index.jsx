@@ -3,7 +3,7 @@ import { Head, Link } from "@inertiajs/react";
 
 export default function Index({ auth, sales }) {
     return (
-        <>
+        <ApplicationLayout>
             <Head title="Daftar Transaksi" />
             <div>
                 <label for="search">Cari</label>
@@ -90,6 +90,6 @@ export default function Index({ auth, sales }) {
                     </tr>
                 </tfoot>
             </table>
-        </>
+        </ApplicationLayout>
     );
 }

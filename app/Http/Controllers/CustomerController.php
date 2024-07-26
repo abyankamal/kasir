@@ -11,12 +11,12 @@ class CustomerController extends Controller
     public function index()
     {
         $customers = Customer::latest()->get();
-        return Inertia::render('Customers/Index', ['customers' => $customers]);
+        return Inertia::render('Customer/Index', ['customers' => $customers]);
     }
 
     public function create()
     {
-        return Inertia::render('Customers/Create');
+        return Inertia::render('Customer/Create');
     }
 
     public function store(Request $request)
@@ -29,7 +29,7 @@ class CustomerController extends Controller
 
         Customer::create($validated);
 
-        return redirect()->route('customers.index')->with('message', 'Customer berhasil ditambahkan');
+        return redirect()->route('customers')->with('message', 'Customer berhasil ditambahkan');
     }
 
     public function edit(Customer $customer)

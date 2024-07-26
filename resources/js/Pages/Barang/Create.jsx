@@ -1,5 +1,3 @@
-// resources/js/Pages/Barang/Create.jsx
-import React from "react";
 import ApplicationLayout from "@/Layouts/ApplicationLayout";
 import { Head, useForm } from "@inertiajs/react";
 
